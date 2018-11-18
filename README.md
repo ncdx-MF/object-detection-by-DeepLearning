@@ -7,8 +7,8 @@ https://pythonprogramming.net/introduction-use-tensorflow-object-detection-api-t
 
 ## 模型文件
 
-faster rcnn weight.tar文件 \<br> 
-链接：https://pan.baidu.com/s/1E0dce81mVb8K6SPYZ6nGug \<br> 
+<br> faster rcnn weight.tar文件 \<br> 
+<br>链接：https://pan.baidu.com/s/1E0dce81mVb8K6SPYZ6nGug \<br> 
 提取码：8t1l 
 
 ## 使用方法
