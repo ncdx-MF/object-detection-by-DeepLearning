@@ -1,21 +1,21 @@
 # object-detection-by-DeepLearning
 Use faster RCNN and opencv to pinpoint the location, rotation Angle, and area of the object
 
-##参考工程地址：
+## 参考工程地址：
 
 https://pythonprogramming.net/introduction-use-tensorflow-object-detection-api-tutorial/
 
-##模型文件
+## 模型文件
 
 faster rcnn weight.tar文件
 链接：https://pan.baidu.com/s/1E0dce81mVb8K6SPYZ6nGug 
 提取码：8t1l 
 
-##使用方法
+## 使用方法
 
 python3 object.py
 
-##注意事项
+## 注意事项
 
 运行前注意需要摄像头，在object.py里修改运行所需的摄像头设备
 line 48
