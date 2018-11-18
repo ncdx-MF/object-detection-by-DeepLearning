@@ -5,6 +5,12 @@ Use faster RCNN and opencv to pinpoint the location, rotation Angle, and area of
 
 https://pythonprogramming.net/introduction-use-tensorflow-object-detection-api-tutorial/
 
+## 环境
+pyhton >= 3.5 </br>
+keras >=1.10.1 </br>
+trensorflow >= 1.10.1 </br>
+opencv >= 3.4.3
+
 ## 模型文件
 
 faster rcnn weight.tar文件 </br>
