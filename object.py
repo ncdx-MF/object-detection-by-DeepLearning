@@ -343,12 +343,12 @@ class Object(QDialog):
 		im_height,im_width,channel = image.shape
 	        num_box = boxes.shape[1]
 		objs = []
-		#找到目标
+		#find objects
 		id_num = 0
-		ex = 5	#区域扩大
+		ex = 5	#Regional expansion
 		################################
 		new_id_num = []
-		deal1 = [4,5,13,14,17]#采用deal1计算的id
+		deal1 = [4,5,13,14,17]#the class id whitch use deal1 to calculate rotation angle
 		################################
 
 	        for i in range(30):
