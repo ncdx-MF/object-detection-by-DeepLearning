@@ -21,9 +21,8 @@ from matplotlib import pyplot as plt
 from PIL import Image
 
 from Funs import *
-from detect1 import *
-from obj import *
-import deal_change
+from detect import *
+import deal_change1
 import deal_change2
 from obj import *
 
@@ -384,7 +383,7 @@ class Object(QDialog):
 
 				#Different categories take different ways to get the rotation angle（Requires experimental testing）
 				if ob.classes in deal1:
-					angle,kp1,kp2,x0,y0,w,h = deal_change.imgGetAngle1(ob.img,temp,ob.classes)	#get rotation angle by Feature matching 
+					angle,kp1,kp2,x0,y0,w,h = deal_change1.imgGetAngle1(ob.img,temp,ob.classes)	#get rotation angle by Feature matching 
 				else:
 					angle,kp1,kp2,x0,y0,w,h = deal_change2.imgGetAngle2(ob.img,temp,ob.classes)
 
@@ -448,7 +447,7 @@ class Object(QDialog):
 	global angle0	
 	global prop
 
-	'''
+	
 	ground_Long = float(self.wl_long.text())
 	ground_wide = float(self.wl_wide.text())
 	lt_x = float(self.pix_x1.text())
@@ -459,18 +458,6 @@ class Object(QDialog):
 	rt_y = float(self.pix_y3.text())
 	rb_x = float(self.pix_x4.text())
 	rb_y = float(self.pix_y4.text())
-	'''
-
-	ground_Long = float(50)
-	ground_wide = float(70)
-	lt_x = float(10)
-	lt_y = float(10)
-	lb_x = float(10)
-	lb_y = float(80)
-	rt_x = float(100)
-	rt_y = float(10)
-	rb_x = float(100)
-	rb_y = float(80)
 
 	w = np.sqrt(np.square(rt_x - lt_x) + np.square(rt_y - lt_y))
 	h = np.sqrt(np.square(lb_x - lt_x) + np.square(lb_y - lt_y))
