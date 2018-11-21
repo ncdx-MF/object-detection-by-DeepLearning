@@ -35,6 +35,8 @@ global x0
 global y0
 global angle0	
 global prop
+global cammera
+camera_id = 1
 image = None
 
 class Object(QDialog):
@@ -45,7 +47,7 @@ class Object(QDialog):
 	objs = []
         super(Object,self).__init__(*args)
         loadUi('object.ui',self)
-	self.cap=cv2.VideoCapture(1)
+	self.cap=cv2.VideoCapture(camera_id)
         self.end_bd.clicked.connect(self.end_ob)
         self.start.clicked.connect(self.Start)
 	self.start_ob.clicked.connect(self.Start_ob)    
@@ -314,7 +316,7 @@ class Object(QDialog):
 	i=1
 	while True:
 		#################################  Clear camera cache	#######################
-		self.cap.open(1)
+		self.cap.open(camera_id)
 		for m in range(30):
 			ret,image = self.cap.read()
 			cv2.waitKey(5)
@@ -377,14 +379,14 @@ class Object(QDialog):
 				id_num = id_num+1
 				
 
-				temp = cv2.imread('./Temp/temp4/'+str(int(ob.classes))+'.jpg')	#更具类型读取模板图
+				temp = cv2.imread('./Temp/temp4/'+str(int(ob.classes))+'.jpg')	#Read template diagrams by type
 
 
-				#不同类别采用了不同方式获得旋转角
+				#Different categories take different ways to get the rotation angle（Requires experimental testing）
 				if ob.classes in deal1:
-					angle,kp1,kp2,x0,y0,w,h = deal_change.imgGetAngle1(ob.img,temp,ob.classes)	#特征匹配获取旋转角
+					angle,kp1,kp2,x0,y0,w,h = deal_change.imgGetAngle1(ob.img,temp,ob.classes)	#get rotation angle by Feature matching 
 				else:
-					angle,kp1,kp2,x0,y0,w,h = deal_change2.imgGetAngle2(ob.img,temp,ob.classes)	#特征匹配获取旋转角
+					angle,kp1,kp2,x0,y0,w,h = deal_change2.imgGetAngle2(ob.img,temp,ob.classes)
 
 
 				ob.setDist(1.00)				
@@ -393,16 +395,16 @@ class Object(QDialog):
 					ob.setMatches([],[])
 					ob.setDist(1.00)
 				else:
-					#已经根据特征点获取到了中心坐标以及旋转角
+					#Get center coordinates and rotation angles based on feature points
 					ob.angle = angle
-					ob.setMatches(kp1,kp2)	#将匹配到的点储存起来
+					ob.setMatches(kp1,kp2)	
 					print('id'+str(ob.id)+": get angle "+str(angle))
-					#获取到中心
+					#get center point
 					if x0 is not None and y0 is not None:
 						cv2.circle(img,(int(left+x0),int(top+y0)),3,(0,255,0),-1)
 						dist = distance(left+x0,top+y0,ob.pix_x,ob.pix_y)
 						
-						if dist < 6.0/prop:	#计算出的中心贴近boundingbox中心，则储存计算中心，保留角度等计算信息
+						if dist < 6.0/prop:	#save the estimated point witch close to the center of boundingbox
 							if dist < 0.35*6.0/prop:
 								ob.setCenter(left+x0,top+y0)
 							ob.setArea(w,h)
@@ -414,7 +416,7 @@ class Object(QDialog):
 							
 			
 				objs.append(ob)
-				#画出目标
+				#draw objects
 				color = tuple(map(int,150*np.random.rand(3)))			
 				cv2.rectangle(img,(left,top),(right,bottom),color,2)
 				font = cv2.FONT_HERSHEY_SIMPLEX
